@@ -2,41 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Portfolio Design System for Roja Kalmangi
+Professional navy blue, teal, and clean color palette
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
+    /* Core Theme Colors */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --foreground: 215 28% 17%;
+    
+    /* Navy Blue Primary Palette */
+    --primary: 215 28% 17%;           /* Deep navy blue */
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 215 25% 27%;     /* Lighter navy for hover */
+    
+    /* Teal Accent Palette */
+    --accent: 173 58% 39%;            /* Professional teal */
+    --accent-foreground: 0 0% 100%;
+    --accent-hover: 173 58% 49%;      /* Brighter teal for hover */
+    --accent-light: 173 58% 89%;      /* Very light teal background */
+    
+    /* Secondary Colors */
+    --secondary: 210 17% 95%;         /* Light gray background */
+    --secondary-foreground: 215 28% 17%;
+    
+    /* Muted Colors */
+    --muted: 210 17% 95%;
+    --muted-foreground: 215 16% 47%;
+    
+    /* Card and Surface Colors */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    --card-foreground: 215 28% 17%;
+    --card-hover: 210 17% 98%;        /* Subtle hover for cards */
+    
+    /* Border and Input */
+    --border: 215 14% 89%;
+    --input: 215 14% 89%;
+    --ring: 173 58% 39%;
+    
+    /* Success and Error */
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(215 28% 17%) 0%, hsl(215 25% 27%) 50%, hsl(173 58% 39%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(210 17% 98%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(173 58% 39%) 0%, hsl(173 58% 49%) 100%);
+    
+    /* Shadows */
+    --shadow-card: 0 4px 6px -1px hsl(215 28% 17% / 0.1), 0 2px 4px -1px hsl(215 28% 17% / 0.06);
+    --shadow-card-hover: 0 10px 25px -3px hsl(215 28% 17% / 0.1), 0 4px 6px -2px hsl(215 28% 17% / 0.05);
+    --shadow-button: 0 4px 14px 0 hsl(173 58% 39% / 0.25);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Spacing and Layout */
+    --radius: 0.75rem;
+    --section-padding: 5rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +128,98 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter antialiased scroll-smooth;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--secondary));
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--accent));
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--accent-hover));
+  }
+}
+
+@layer components {
+  /* Hero Section Styles */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  .hero-animate {
+    animation: heroFloat 6s ease-in-out infinite;
+  }
+  
+  /* Card Styles */
+  .card-gradient {
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+  }
+  
+  .card-gradient:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-4px);
+  }
+  
+  /* Button Styles */
+  .btn-primary {
+    background: var(--gradient-accent);
+    box-shadow: var(--shadow-button);
+    transition: var(--transition-smooth);
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px 0 hsl(var(--accent) / 0.4);
+  }
+  
+  /* Animation Utilities */
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
+  }
+  
+  .stagger-delay-1 { animation-delay: 0.1s; }
+  .stagger-delay-2 { animation-delay: 0.2s; }
+  .stagger-delay-3 { animation-delay: 0.3s; }
+  .stagger-delay-4 { animation-delay: 0.4s; }
+}
+
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
 }
